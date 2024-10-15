@@ -7,6 +7,9 @@
         placeholder="之乎者喵"
         class="input-box"
       ></textarea>
+      <div>
+        <button @click="pick_input" class="pick-input-button">试试手气</button>
+      </div>
       <div v-html="output" class="output-box"></div>
     </div>
   </div>
@@ -14,12 +17,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { convert_text } from '../utils/miao_text_generator'
+import { convert_text, get_random_input } from '../utils/miao_text_generator'
 
 export default defineComponent({
   name: 'miao_text_generator',
   setup() {
-    const init_sentence = ''
+    const init_sentence = get_random_input()
     const input = ref(init_sentence)
     const output = ref(convert_text(init_sentence))
 
@@ -27,7 +30,11 @@ export default defineComponent({
       output.value = convert_text(newInput)
     })
 
-    return { input, output }
+    const pick_input = () => {
+      input.value = get_random_input()
+    }
+
+    return { input, output, pick_input }
   },
 })
 </script>
@@ -92,5 +99,37 @@ textarea,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
   box-sizing: border-box;
+}
+
+.pick-input-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  height: 55px;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+}
+
+.pick-input-button:hover {
+  background-color: #1e40af;
+  cursor: pointer;
+}
+
+.pick-input-button:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #1e40af;
 }
 </style>
