@@ -9,6 +9,7 @@
       ></textarea>
       <div>
         <button @click="pick_input" class="pick-input-button">试试手气</button>
+        <button @click="play_audio" class="play-audio-button">戳一戳吧</button>
       </div>
       <div v-html="output" class="output-box"></div>
     </div>
@@ -34,7 +35,11 @@ export default defineComponent({
       input.value = get_random_input()
     }
 
-    return { input, output, pick_input }
+    const play_audio = () => {
+      new Audio('miaomiao.mp3').play()
+    }
+
+    return { input, output, pick_input, play_audio }
   },
 })
 </script>
@@ -131,5 +136,37 @@ textarea,
 .pick-input-button:active {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   background-color: #1e40af;
+}
+
+.play-audio-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  height: 55px;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+}
+
+.play-audio-button:hover {
+  background-color: #45a049;
+  cursor: pointer;
+}
+
+.play-audio-button:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #45a049;
 }
 </style>
